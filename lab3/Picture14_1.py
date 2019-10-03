@@ -16,97 +16,110 @@ y1 = 80
 
 for i in range(15):
     rectangle(x1, y1, (x1 + 30), (y1 + 250))
-    x1 = x1 + 30
-
-polygon([(280,340), (350,360), (350,460), (280,440 )])
-
-polygon([(280, 340), (350,360), (315, 300)])
-
-polygon([(315, 300), (370, 280), (405, 340), (350,360)])
-
-polygon([(350,460), (350,360), (405, 340), (405, 440)])
-
-brushColor("black")
-
-circle(315, 400, 20, 27)
-
-brushColor("#8B4513")
-penColor("#8B4513")
-
-x2 = 40
-y2 = 425
-
-circle(110, 475, 60, 30) #переднее тело
-
-circle(45, 500, 13, 35) #ноги передние верхние
-circle(100, 520, 13, 35)
+    x1 = x1 + 30  # 30 is wieght of zabor
 
 
+def budka(x_budka, y_budka):
+    brushColor("#DEB887")
 
-circle(160, 460, 20, 27) #тело заднее
-circle(190, 460, 30, 27)
-circle(205, 480, 20, 27)
+    x11 = x_budka
+    y11 = y_budka
+    polygon([(x_budka, y_budka), (x_budka + 70, y_budka + 20), (x_budka + 70, y_budka + 120), (x11, y11 + 100)])
 
-circle(220, 510, 5, 25) #ноги задние верхние
-circle(170, 490, 5, 25)
+    polygon([(x_budka, y_budka), (x_budka + 70, y_budka + 20),
+             (x_budka + 35, y_budka - 40)])  # treangle roof
 
-circle(35, 535, 15, 5) #ноги передние нижние
-circle(89, 555, 15, 5)
+    polygon([(x_budka + 35, y_budka - 40), (x_budka + 90, y_budka - 60), (x_budka + 125, y_budka),
+             (x_budka + 70, y_budka + 20)])  # rectangle roof
 
-circle(158, 514, 13, 4) #ноги задние нижние
-circle(209, 533, 13 ,4)
+    polygon([(x_budka + 70, y_budka + 120), (x_budka + 70, y_budka + 20), (x_budka + 125, y_budka),
+             (x_budka + 125, y_budka + 100)])  # right wall
 
+    brushColor("black")
 
-penColor("black")
-rectangle(x2, y2, x2 + 60, y2 + 60) #голова основа
-
-circle(40, 440, 10, 14) #уши на голове
-circle(100, 440, 10 ,14)
-
-
-brushColor("white") #глаз левый
-circle(58, 453, 7, 3)
-brushColor("black")
-circle(58, 453, 2, 2)
+    circle(x_budka + 35, y_budka + 60, 20, 27)  # budka enterence
 
 
-brushColor("white")  #глаз правый
-circle(82, 453, 7, 3)
-brushColor("black")
-circle(82, 453, 2, 2)
+def dog(x_oporn, y_oporn):
 
-x = 50
-y = 480
+    brushColor("#8B4513")
+    penColor("#8B4513")
 
-polyline([(x, y), (x+5, y-6), (x+8, y-7), (x+10, y-8), (x+30, y-8), (x+32, y-7), (x+35, y-6), (x+40, y)]) #рот без зубов
+    x2 = x_oporn - 70  # coordinate for head
+    y2 = y_oporn - 50
 
-brushColor("white")
-polygon([(x+5, y-6), (x+10, y-8), (x+7, y-15)])    #зубы без рта
-polygon([(x+35, y-6), (x+30, y-8), (x+33, y-15)])
+    circle(x_oporn, y_oporn, 60, 30)  # body front
+
+    circle(x_oporn - 65, y_oporn + 25, 13, 35)  # legs front upper
+    circle(x_oporn - 10, y_oporn + 45, 13, 35)
+
+    circle(x_oporn + 50, y_oporn - 15, 20, 27)  # body behing
+    circle(x_oporn + 80, y_oporn - 15, 30, 27)
+    circle(x_oporn + 95, y_oporn + 5, 20, 27)
+
+    circle(x_oporn + 110, y_oporn + 35, 5, 25)  # legs upper behind
+    circle(x_oporn + 60, y_oporn + 15, 5, 25)
+
+    circle(x_oporn - 75, y_oporn + 60, 15, 5)  # legs under front
+    circle(x_oporn - 21, y_oporn + 80, 15, 5)
+
+    circle(x_oporn + 48, y_oporn + 39, 13, 4)  # legs under behind
+    circle(x_oporn + 99, y_oporn + 58, 13, 4)
+
+    penColor("black")
+
+    rectangle(x2, y2, x2 + 60, y2 + 60)  # head
+
+    circle(x2, y2 + 15, 10, 14)  # ears
+    circle(x2 + 60, y2 + 15, 10, 14)
+
+    brushColor("white")  # left eye
+    circle(x_oporn-52, y_oporn-22, 7, 3)
+    brushColor("black")
+    circle(x_oporn-52, y_oporn-22, 2, 2)
+
+    brushColor("white")  # right eye
+    circle(x_oporn-28, y_oporn-22, 7, 3)
+    brushColor("black")
+    circle(x_oporn-28, y_oporn-22, 2, 2)
+
+    x = x_oporn-60
+    y = y_oporn+5
+
+    polyline(
+        [(x, y), (x + 5, y - 6), (x + 8, y - 7), (x + 10, y - 8), (x + 30, y - 8), (x + 32, y - 7), (x + 35, y - 6),
+         (x + 40, y)])  # mouth without tith
+
+    brushColor("white")
+    polygon([(x + 5, y - 6), (x + 10, y - 8), (x + 7, y - 15)])  # toth without mouth
+    polygon([(x + 35, y - 6), (x + 30, y - 8), (x + 33, y - 15)])
 
 
-brushColor("")
-circle(300, 425, 10, 5) #цепь начало от входа
-circle(295, 430, 5, 10)
-circle(292, 434, 9, 4)
-circle(285, 439, 7, 3)
-circle(280, 442, 8, 3)
-circle(270, 444, 9, 3)
-circle(260, 446, 9, 3)
-circle(258, 454, 3, 8)
-circle(258, 464, 3, 8)
-circle(264, 467, 9, 3)
-circle(272, 470, 9, 3)
-x11 = 272
-y11 = 470
-for i in range(6):
-    circle(x11, y11, 9, 3)
-    x11 = x11 + 8
-    y11 = y11 + 3
+def metal_constr(x_budka, y_budka):
+    brushColor("")
+    circle(x_budka + 20, y_budka + 85, 10, 5)  # metal near the enter
+    circle(x_budka + 15, y_budka + 90, 5, 10)
+    circle(x_budka + 12, y_budka + 94, 9, 4)
+    circle(x_budka + 5, y_budka + 99, 7, 3)
+    circle(x_budka, y_budka + 102, 8, 3)
+    circle(x_budka - 10, y_budka + 104, 9, 3)
+    circle(x_budka - 20, y_budka + 106, 9, 3)
+    circle(x_budka - 22, y_budka + 114, 3, 8)
+    circle(x_budka - 22, y_budka + 124, 3, 8)
+    circle(x_budka - 16, y_budka + 127, 9, 3)
+    circle(x_budka - 8, y_budka + 130, 9, 3)
+    x111 = x_budka - 8
+    y111 = y_budka + 130
+    for num in range(6):
+        circle(x111, y111, 9, 3)
+        x111 = x111 + 8
+        y111 = y111 + 3
 
 
+budka(280, 340)
 
+dog(110, 475)
 
-
+metal_constr(280, 340)
 
 run()
