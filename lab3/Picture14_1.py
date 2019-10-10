@@ -41,14 +41,11 @@ def budka(x_budka, y_budka):
     y11 = y_budka
     graph.polygon([(x_budka, y_budka), (x_budka + 70, y_budka + 20), (x_budka + 70, y_budka + 120), (x11, y11 + 100)])
 
-    graph.polygon([(x_budka, y_budka), (x_budka + 70, y_budka + 20),
-             (x_budka + 35, y_budka - 40)])  # treangle roof
+    graph.polygon([(x_budka, y_budka), (x_budka + 70, y_budka + 20), (x_budka + 35, y_budka - 40)])  # treangle roof
 
-    graph.polygon([(x_budka + 35, y_budka - 40), (x_budka + 90, y_budka - 60), (x_budka + 125, y_budka),
-             (x_budka + 70, y_budka + 20)])  # rectangle roof
+    graph.polygon([(x_budka + 35, y_budka - 40), (x_budka + 90, y_budka - 60), (x_budka + 125, y_budka), (x_budka + 70, y_budka + 20)])  # rectangle roof
 
-    graph.polygon([(x_budka + 70, y_budka + 120), (x_budka + 70, y_budka + 20), (x_budka + 125, y_budka),
-             (x_budka + 125, y_budka + 100)])  # right wall
+    graph.polygon([(x_budka + 70, y_budka + 120), (x_budka + 70, y_budka + 20), (x_budka + 125, y_budka), (x_budka + 125, y_budka + 100)])  # right wall
 
     graph.brushColor("black")
 
