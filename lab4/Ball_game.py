@@ -57,8 +57,8 @@ def main_timer():
     root.after(10, ball2.move)
     root.after(10, ball3.move)
 
-#def click(event):
-#    print('click')
+def click(event):
+    print('click')
 
 #canv.bind('<Button-1>', click)
 tk.mainloop()
