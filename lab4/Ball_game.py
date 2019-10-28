@@ -7,7 +7,7 @@ colors = ['red', 'orange', 'yellow', 'green', 'blue']
 
 g = 0.1
 dt = 1
-n = 6
+n = 5
 
 tim = 0
 
@@ -88,9 +88,9 @@ class Game:
     def __init__(self):
         self.score = 0
 
-    def canvas_click_handler(self, event):
-        for i in balls:
-            if ((i.x - event.x) ** 2) + ((i.y - event.y) ** 2) <= i.r:
+    def click_score(self, event):
+        for ball in balls:
+            if ((ball.x - event.x) ** 2) + ((ball.y - event.y) ** 2) <= ball.r ** 2:
                 self.score += 1
         print(str(self.score))
 
@@ -102,7 +102,7 @@ class Game:
         root.geometry(str(W) + "x" + str(H))
         canvas = tk.Canvas(root, bg='white')
         canvas.pack(fill=tk.BOTH, expand=1)
-        canvas.bind('<Button-1>', self.canvas_click_handler)
+        canvas.bind('<Button-1>', self.click_score)
         balls = []
         for i in range(n):
             balls.append(Shape())
