@@ -1,61 +1,41 @@
 import tkinter as tk
-from random import randrange as rnd, c
-import time
+from random import randrange as rnd
+import random
 import math
 
-root = tk.Tk()
+colors = ['red', 'orange', 'yellow', 'green', 'blue']
 
-root.geometry('800x600')
-
-canv = tk.Canvas(root, bg='white')
-canv.pack(fill=tk.BOTH, expand=1)
-
-colors = ['red', 'orange','yellow', 'green','blue']
-
-Balls = []
-
-g = 10
-dt = 10
-n = 10
+g = 0.1
+dt = 1
+n = 6
 
 tim = 0
 
+H = 800
+W = 600
+
 
 class Shape:
-    def __init__(self, color):
-        self.color = color
-        self.x = rnd(100, 700)
-        self.y = rnd(100, 500)
+    def __init__(self):
+        global H, W
+        self.col = colors[random.randint(0, 4)]
+        self.x = rnd(100, W - 100)
+        self.y = rnd(100, H - 100)
         self.r = rnd(30, 50)
-        self.dx = rnd(-10, 10)
-        self.dy = rnd(-10, 10)
-        self.obj = 0
+        self.dx = (rnd(-1, 1) * 1)
+        self.dy = (rnd(-1, 1) * 1)
 
-    def draw(self):
-        for i in Balls:
-            if ((self.x - i.x) ** 2) + ((self.y - i.y) ** 2)  >= ((self.r + i.r) ** 2):
-                self.obj = canv.create_oval(self.x - self.r, self.y - self.r,
-                                            self.x + self.r, self.y + self.r,
-                                            fill=self.color, width=0)
+        for ball in balls:
+            while (ball.r + self.r) ** 2 >= (ball.x - self.x) ** 2 + (ball.y - self.y) ** 2:
+                self.x = rnd(100, W - 100)
+                self.y = rnd(100, H - 100)
+        self.obj = canvas.create_oval(self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r, fill=self.col)
 
     def move(self):
-        for i in ball:
-            if ((self.x - i.x) ** 2) + ((self.y - i.y) ** 2) <= ((self.r + i.r) ** 2):
-                self.dx = - sefl.dx
-                self.dy = - sefl.dy
-        if (self.x - self.r) <= 0:
-            self.dx = - self.dx
-        if (self.x + self.r) >= 800:
-            self.dx = - self.dx
-        if (self.y - self.r) <= 0:
-            self.dy = - self.dy
-        if (self.y + self.r) >= 600:
-            self.dy = - self.dy
 
         self.x += self.dx
         self.y += self.dy
 
-    def axelaration(self):
         global tim
         global g
         self.dx = self.dx + (g * math.cos(tim))
@@ -63,15 +43,42 @@ class Shape:
         if tim >= (2 * math.pi):
             tim = tim - 2 * math.pi
         else:
-            tim = tim + 0.1
+            tim = tim + 0.01
+
+        for ball in balls:
+            if (self != ball) and (((self.x - ball.x) ** 2) + ((self.y - ball.y) ** 2) <= ((self.r + ball.r) ** 2)):
+                self.dx = - self.dx
+                self.dy = - self.dy
+                #ball.dx = - ball.dx
+                #ball.dy = - ball.dy
+
+        if (self.x - self.r) <= 0:
+            self.dx = - self.dx
+            self.x = self.r
+        if (self.x + self.r) >= W:
+            self.dx = - self.dx
+            self.x = W - self.r
+        if (self.y - self.r) <= 0:
+            self.dy = - self.dy
+            self.y = self.r
+        if (self.y + self.r) >= H:
+            self.dy = - self.dy
+            self.y = H - self.r
+
+        self.dx *= 0.995
+        self.dy *= 0.995
+
+
 
     def show(self):
-        canvas.move(self.obj, self.dx, self.dy)
+        canvas.delete(self.obj)
+        self.obj = canvas.create_oval(self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r, fill=self.col)
+
+
 
 def tick():
     global dt
-
-    for i in balls:
+    for ball in balls:
         ball.move()
         ball.show()
     root.after(dt, tick)
@@ -88,12 +95,23 @@ class Game:
         print(str(self.score))
 
     def main(self):
-        global root, canvas,
+        global root, canvas, balls
+        global g, dt, n
+
+        root = tk.Tk()
+        root.geometry(str(W) + "x" + str(H))
+        canvas = tk.Canvas(root, bg='white')
+        canvas.pack(fill=tk.BOTH, expand=1)
+        canvas.bind('<Button-1>', self.canvas_click_handler)
+        balls = []
+        for i in range(n):
+            balls.append(Shape())
+
+        tick()
+        root.mainloop()
 
 
-
-
-
-
-
+start = Game()
+start.main()
 tk.mainloop()
+
