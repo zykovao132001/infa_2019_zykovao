@@ -26,7 +26,7 @@ class Shape:
         self.dy = (rnd(-1, 1) * 1)
 
         for ball in balls:
-            while (ball.r + self.r) ** 2 >= (ball.x - self.x) ** 2 + (ball.y - self.y) ** 2:
+            while (2 * (ball.r + self.r)) ** 2 >= (ball.x - self.x) ** 2 + (ball.y - self.y) ** 2:
                 self.x = rnd(100, W - 100)
                 self.y = rnd(100, H - 100)
         self.obj = canvas.create_oval(self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r, fill=self.col)
@@ -47,8 +47,10 @@ class Shape:
 
         for ball in balls:
             if (self != ball) and (((self.x - ball.x) ** 2) + ((self.y - ball.y) ** 2) <= ((self.r + ball.r) ** 2)):
-                self.dx = - self.dx
+                self.dx = - 1.01*self.dx
                 self.dy = - self.dy
+                self.x += 2 * self.dx
+                self.y += 2 * self.dy
 
         if (self.x - self.r) <= 0:
             self.dx = - self.dx
