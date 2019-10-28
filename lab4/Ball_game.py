@@ -49,8 +49,6 @@ class Shape:
             if (self != ball) and (((self.x - ball.x) ** 2) + ((self.y - ball.y) ** 2) <= ((self.r + ball.r) ** 2)):
                 self.dx = - self.dx
                 self.dy = - self.dy
-                #ball.dx = - ball.dx
-                #ball.dy = - ball.dy
 
         if (self.x - self.r) <= 0:
             self.dx = - self.dx
@@ -68,12 +66,9 @@ class Shape:
         self.dx *= 0.995
         self.dy *= 0.995
 
-
-
     def show(self):
         canvas.delete(self.obj)
         self.obj = canvas.create_oval(self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r, fill=self.col)
-
 
 
 def tick():
@@ -114,4 +109,3 @@ class Game:
 start = Game()
 start.main()
 tk.mainloop()
-
