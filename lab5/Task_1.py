@@ -127,10 +127,9 @@ class gun():
 class target():
     def __init__(self):
         self.points = 0
-        #self.live = 1
     # FIXME: don't work!!! How to call this functions when object is created?
-        self.id = canv.create_oval(0,0,0,0)
-        self.id_points = canv.create_text(30,30,text = self.points,font = '28')
+        self.id = canv.create_oval(0, 0, 0, 0)
+        self.id_points = canv.create_text(30, 30, text=self.points, font='28')
         self.new_target()
         self.live = 1
 
@@ -166,7 +165,6 @@ def new_game(event=''):
     canv.bind('<ButtonRelease-1>', g1.fire2_end)
     canv.bind('<Motion>', g1.targetting)
 
-    z = 0.03
     t1.live = 1
     while t1.live or balls:
         for b in balls:
@@ -190,4 +188,4 @@ def new_game(event=''):
 
 new_game()
 
-mainloop()
+tk.mainloop()
