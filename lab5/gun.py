@@ -11,6 +11,37 @@ canv.pack(fill=tk.BOTH, expand=1)
 POINTS = 0
 BULLET = 0
 
+class Treangles:
+    def __init__(self, x1, y1, x2, y2, x3, y3, vx, vy):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        self.x3 = x3
+        self.y3 = y3
+        self.vx = vx
+        self.vy = vy
+        self.color = 'blue'
+        self.id = canv.create_polygon(self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, fill=self.color)
+
+    def move(self):
+        self.x1 += self.vx
+        self.x2 += self.vx
+        self.x3 += self.vx
+        self.y1 += self.vy
+        self.y2 += self.vy
+        self.y3 += self.vy
+        canv.move(self.id, self.vx, self.vy)
+
+    def wall_normal_movement(self):
+        if ((self.x1 or self.x2 or self.x3) < 0) or ((self.x1 or self.x2 or self.x3) > 800):
+            self.vx *= -1
+        if (self.y1 or self.y2 or self.y3) < 0:
+            self.vy *= -1
+        if (self.y1 or self.y2 or self.y3) > 600:
+            self.vy = 0
+            self.vx = 0
+
 
 class ball:
 
@@ -34,8 +65,8 @@ class ball:
         else:
             for i in range(self.n):
                 self.points_basic.append(
-                    (self.x + (self.r * math.sin(2 * i * math.pi / self.n)),
-                     self.y + (self.r * math.cos(2 * i * math.pi / self.n))))
+                    (self.x + (self.r * math.sin((2 * i + 0.5 * n) * math.pi/ self.n)),
+                     self.y + (self.r * math.cos((2 * i + 0.5 * n) * math.pi / self.n))))
             self.id = canv.create_polygon(self.points_basic, fill=self.color)
         self.live = 7
 
@@ -71,27 +102,33 @@ class ball:
             return False
 
     def __del__(self):
-        canv.delete(self.id)
+        if self.n != 0:
+            canv.delete(self.id)
+        else:
+            canv.delete(self.id)
+            for i in range(self.n):
+                canv.create_polygon(self.x, self.y, self.x + 
 
 
-class treangle:
-    def __init__(self):
-        self.x1 = 0
-        self.y1 = 0
-        self.x2 = 0
-        self.y2 = 0
-        self.x3 = 0
-        self.y3 = 0
-        self.vx = 0
-        self.vy = 0
+
+class Treangle:
+    def __init__(self, x1, y1, x2, y2, x3, y3, vx, vy):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        self.x3 = x3
+        self.y3 = y3
+        self.vx = vx
+        self.vy = vy
         self.color = choice(['blue', 'green', 'red', 'brown'])
         self.id = canv.create_polygon(self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, fill=self.color)
         self.live = 5
 
     def walltest(self):
-        if (self.x1 or self.x2 or self.x3 < 0) or (self.x1 or self.x2 or self.x3)> 800:
+        if (self.x1 or self.x2 or self.x3 < 0) or (self.x1 or self.x2 or self.x3) > 800:
             self.vx *= -1
-        elif (self.y1 or self.y2 or self.y3 < 0) or (self.y1 or self.y2 or self.y3)> 800:
+        elif (self.y1 or self.y2 or self.y3 < 0) or (self.y1 or self.y2 or self.y3) > 800:
             self.vy *= -1
 
     def move(self):
@@ -108,7 +145,7 @@ class treangle:
         if self.live < 0:
             canv.delete(self.id)
 
-class gun:
+class Gun:
 
     def __init__(self, x=20, y=450, vx=0, vy=0, v=5):
         self.x = x
@@ -179,10 +216,9 @@ class gun:
         canv.move(self.id, self.vx, self.vy)
 
 
-class target:
+class Target:
 
     def __init__(self, n=0):
-        """ Инициализация новой цели. """
         self.x = rnd(520, 760)
         self.points_basic = []
         self.y = rnd(120, 530)
@@ -227,17 +263,17 @@ class target:
 
 
 screen1 = canv.create_text(400, 300, text='', font='28')
-g1 = gun()
+g1 = Gun()
 bullet = 0
 balls = []
 screen2 = canv.create_text(30, 30, text=str(POINTS) + ' : ' + str(BULLET), font='28')
 
 
-def new_game(event=''):
+def new_game():
     global gun, screen1, balls, bullet, POINTS, BULLET
-    t1 = target()
-    t2 = target(4)
-    t3 = target(5)
+    t1 = Target()
+    t2 = Target(4)
+    t3 = Target(5)
     bullet = 0
     balls = []
     treangles = []
@@ -253,7 +289,7 @@ def new_game(event=''):
         i = 0
         while i < len(balls):
             balls[i].move()
-            if balls[i].hittest(t1) and (t1.live or t2.live or t3.live):
+            if (balls[i].hittest(t1) or balls[i].hittest(t2) or balls[i].hittest(t3)) and (t1.live or t2.live or t3.live):
                 t1.live = 0
                 t2.live = 0
                 t3.live = 0
@@ -266,6 +302,7 @@ def new_game(event=''):
                 canv.itemconfig(screen2, text=str(POINTS) + ' : ' + str(BULLET))
             if balls[i].live < 0:
                 balls.pop(i)
+
 
             i += 1
         canv.update()
@@ -282,5 +319,4 @@ def new_game(event=''):
 
 
 new_game()
-
 root.mainloop()
