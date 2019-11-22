@@ -163,8 +163,8 @@ class Gun:
         global balls, bullet, BULLET
         bullet += 1
         BULLET += 1
-        new_ball = ball(n=choice([0, 4, 5]), x=self.x + max(self.f2_power * 5, 20) * math.cos(self.an),
-                    y=self.y + max(self.f2_power * 5, 20) * math.sin(self.an))
+        new_ball = ball(n=choice([0, 4, 5]), x=self.x + max(self.f2_power * 5, 20) * math.cos(self.an),\
+                        y=self.y + max(self.f2_power * 5, 20) * math.sin(self.an))
         new_ball.r += 5
         self.an = math.atan((event.y-new_ball.y) / (event.x-new_ball.x))
         new_ball.vx = self.f2_power * math.cos(self.an) + self.vx
@@ -256,7 +256,6 @@ class Target:
                       5 * (time.time() - self.time)))
         self.x = self.Ax * math.cos(time.time() - self.time) + 620 + 20 * math.sin(5 * (time.time() - self.time))
         self.y = self.Ay * math.cos(time.time() - self.time) + 325 + 20 * math.sin(5 * (time.time() - self.time))
-
 
 
 screen1 = canv.create_text(400, 300, text='', font='28')
