@@ -65,7 +65,7 @@ class ball:
         else:
             for i in range(self.n):
                 self.points_basic.append(
-                    (self.x + (self.r * math.sin((2 * i + 0.5 * n) * math.pi/ self.n)),
+                    (self.x + (self.r * math.sin((2 * i + 0.5 * n) * math.pi / self.n)),
                      self.y + (self.r * math.cos((2 * i + 0.5 * n) * math.pi / self.n))))
             self.id = canv.create_polygon(self.points_basic, fill=self.color)
         self.live = 7
@@ -108,9 +108,6 @@ class ball:
             canv.delete(self.id)
             # for i in range(self.n):
             #     canv.create_polygon(self.x, self.y, self.x +
-
-
-
 # class Treangle:
 #     def __init__(self, x1, y1, x2, y2, x3, y3, vx, vy):
 #         self.x1 = x1
@@ -145,8 +142,8 @@ class ball:
 #         if self.live < 0:
 #           canv.delete(self.id)
 
-class Gun:
 
+class Gun:
     def __init__(self, x=20, y=450, vx=0, vy=0, v=5):
         self.x = x
         self.y = y
@@ -276,12 +273,12 @@ def new_game():
     t3 = Target(5)
     bullet = 0
     balls = []
-    treangles = []
+    # treangles = []
     canv.bind('<Button-1>', g1.fire2_start)
     canv.bind('<ButtonRelease-1>', g1.fire2_end)
     canv.bind('<Motion>', g1.targetting)
 
-    z = 0.03
+    # z = 0.03
     t1.live = 1
     t2.live = 1
     t3.live = 1
@@ -302,8 +299,6 @@ def new_game():
                 canv.itemconfig(screen2, text=str(POINTS) + ' : ' + str(BULLET))
             if balls[i].live < 0:
                 balls.pop(i)
-
-
             i += 1
         canv.update()
         time.sleep(0.03)
