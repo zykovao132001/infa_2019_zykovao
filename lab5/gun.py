@@ -163,7 +163,7 @@ class Gun:
         global balls, bullet, BULLET
         bullet += 1
         BULLET += 1
-        new_ball = ball(n=choice([0, 4, 5]), x=self.x + max(self.f2_power * 5, 20) * math.cos(self.an),\
+        new_ball = ball(n=choice([0, 4, 5]), x=self.x + max(self.f2_power * 5, 20) * math.cos(self.an),
                         y=self.y + max(self.f2_power * 5, 20) * math.sin(self.an))
         new_ball.r += 5
         self.an = math.atan((event.y-new_ball.y) / (event.x-new_ball.x))
