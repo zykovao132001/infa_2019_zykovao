@@ -11,36 +11,36 @@ canv.pack(fill=tk.BOTH, expand=1)
 POINTS = 0
 BULLET = 0
 
-class Treangles:
-    def __init__(self, x1, y1, x2, y2, x3, y3, vx, vy):
-        self.x1 = x1
-        self.y1 = y1
-        self.x2 = x2
-        self.y2 = y2
-        self.x3 = x3
-        self.y3 = y3
-        self.vx = vx
-        self.vy = vy
-        self.color = 'blue'
-        self.id = canv.create_polygon(self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, fill=self.color)
-
-    def move(self):
-        self.x1 += self.vx
-        self.x2 += self.vx
-        self.x3 += self.vx
-        self.y1 += self.vy
-        self.y2 += self.vy
-        self.y3 += self.vy
-        canv.move(self.id, self.vx, self.vy)
-
-    def wall_normal_movement(self):
-        if ((self.x1 or self.x2 or self.x3) < 0) or ((self.x1 or self.x2 or self.x3) > 800):
-            self.vx *= -1
-        if (self.y1 or self.y2 or self.y3) < 0:
-            self.vy *= -1
-        if (self.y1 or self.y2 or self.y3) > 600:
-            self.vy = 0
-            self.vx = 0
+# class Treangles:
+#     def __init__(self, x1, y1, x2, y2, x3, y3, vx, vy):
+#         self.x1 = x1
+#         self.y1 = y1
+#         self.x2 = x2
+#         self.y2 = y2
+#         self.x3 = x3
+#         self.y3 = y3
+#         self.vx = vx
+#         self.vy = vy
+#         self.color = 'blue'
+#         self.id = canv.create_polygon(self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, fill=self.color)
+#
+#     def move(self):
+#         self.x1 += self.vx
+#         self.x2 += self.vx
+#         self.x3 += self.vx
+#         self.y1 += self.vy
+#         self.y2 += self.vy
+#         self.y3 += self.vy
+#         canv.move(self.id, self.vx, self.vy)
+#
+#     def wall_normal_movement(self):
+#         if ((self.x1 or self.x2 or self.x3) < 0) or ((self.x1 or self.x2 or self.x3) > 800):
+#             self.vx *= -1
+#         if (self.y1 or self.y2 or self.y3) < 0:
+#             self.vy *= -1
+#         if (self.y1 or self.y2 or self.y3) > 600:
+#             self.vy = 0
+#             self.vx = 0
 
 
 class ball:
@@ -106,44 +106,44 @@ class ball:
             canv.delete(self.id)
         else:
             canv.delete(self.id)
-            for i in range(self.n):
-                canv.create_polygon(self.x, self.y, self.x + 
+            # for i in range(self.n):
+            #     canv.create_polygon(self.x, self.y, self.x +
 
 
 
-class Treangle:
-    def __init__(self, x1, y1, x2, y2, x3, y3, vx, vy):
-        self.x1 = x1
-        self.y1 = y1
-        self.x2 = x2
-        self.y2 = y2
-        self.x3 = x3
-        self.y3 = y3
-        self.vx = vx
-        self.vy = vy
-        self.color = choice(['blue', 'green', 'red', 'brown'])
-        self.id = canv.create_polygon(self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, fill=self.color)
-        self.live = 5
-
-    def walltest(self):
-        if (self.x1 or self.x2 or self.x3 < 0) or (self.x1 or self.x2 or self.x3) > 800:
-            self.vx *= -1
-        elif (self.y1 or self.y2 or self.y3 < 0) or (self.y1 or self.y2 or self.y3) > 800:
-            self.vy *= -1
-
-    def move(self):
-        self.live -= 0.03
-        self.x1 += self.vx
-        self.x2 += self.vx
-        self.x3 += self.vx
-        self.y1 += self.vy
-        self.y2 += self.vy
-        self.y3 += self.vy
-        self.vy += 0.1
-        canv.move(self.id, self.vx, self.vy)
-        self.walltest()
-        if self.live < 0:
-            canv.delete(self.id)
+# class Treangle:
+#     def __init__(self, x1, y1, x2, y2, x3, y3, vx, vy):
+#         self.x1 = x1
+#         self.y1 = y1
+#         self.x2 = x2
+#         self.y2 = y2
+#         self.x3 = x3
+#         self.y3 = y3
+#         self.vx = vx
+#         self.vy = vy
+#         self.color = choice(['blue', 'green', 'red', 'brown'])
+#         self.id = canv.create_polygon(self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, fill=self.color)
+#         self.live = 5
+#
+#     def walltest(self):
+#         if (self.x1 or self.x2 or self.x3 < 0) or (self.x1 or self.x2 or self.x3) > 800:
+#             self.vx *= -1
+#         elif (self.y1 or self.y2 or self.y3 < 0) or (self.y1 or self.y2 or self.y3) > 800:
+#             self.vy *= -1
+#
+#     def move(self):
+#         self.live -= 0.03
+#         self.x1 += self.vx
+#         self.x2 += self.vx
+#         self.x3 += self.vx
+#         self.y1 += self.vy
+#         self.y2 += self.vy
+#         self.y3 += self.vy
+#         self.vy += 0.1
+#         canv.move(self.id, self.vx, self.vy)
+#         self.walltest()
+#         if self.live < 0:
+#           canv.delete(self.id)
 
 class Gun:
 
@@ -314,7 +314,7 @@ def new_game():
         t2.move()
         t3.move()
     canv.itemconfig(screen1, text='')
-    canv.delete(gun)
+    canv.delete(Gun)
     root.after(3, new_game)
 
 
